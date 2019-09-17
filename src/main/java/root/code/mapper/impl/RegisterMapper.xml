@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="root.code.mapper.RegisterMapper">
+    <select id="findRegister" resultType="register" parameterType="register">
+      SELECT
+      register_id 'registerId',
+      register_test_number 'testNumber',
+      register_card_id 'cardId',
+      register_name 'name',
+      register_major 'major',
+      register_culture 'culture',
+      register_province 'province',
+      register_college 'college',
+      register_educational_system 'educationalSystem',
+      register_campus 'campus',
+      register_esm 'esm',
+      register_year 'year'
+      FROM
+      register
+      WHERE
+      1=1
+      <if test="testNumber!=''">
+        AND
+        register_test_number = #{testNumber}
+      </if>
+      <if test="cardId!=''">
+        AND
+        register_card_id = #{cardId}
+      </if>
+    </select>
+
+</mapper>

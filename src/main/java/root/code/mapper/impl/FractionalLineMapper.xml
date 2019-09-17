@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="root.code.mapper.FractionalLineMapper">
+  <select id="findFranctionalLine" resultType="fractionalLine" parameterType="fractionalLine">
+    SELECT
+    fractional_line_id 'fractionalLineId',
+    fractional_line_year 'year',
+    fractional_line_province 'province',
+    fractional_line_subject 'subject',
+    fractional_line_major 'major',
+    fractional_line_fraction 'fraction'
+    FROM
+    fractional_line
+    WHERE
+    1=1
+    <if test="province!='' and province!='全国'">
+      AND
+      fractional_line_province LIKE #{province}
+    </if>
+    <if test="year!=''">
+      AND
+      fractional_line_year = #{year}
+    </if>
+    <if test="major!=''">
+      AND
+      fractional_line_major LIKE #{major}
+    </if>
+  </select>
+
+  <select id="findTotalYears" resultType="String">
+    SELECT
+    DISTINCT
+    fractional_line_year
+    FROM
+    fractional_line
+    ORDER BY
+    fractional_line_year+0
+    DESC
+  </select>
+
+  <select id="findTotalProvinces" resultType="String">
+    SELECT
+    DISTINCT
+    province_name
+    FROM
+    province
+  </select>
+
+</mapper>
